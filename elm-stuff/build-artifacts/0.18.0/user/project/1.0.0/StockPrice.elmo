@@ -1,0 +1,43 @@
+var _user$project$StockPrice$below200 = function (n) {
+	return (_elm_lang$core$Native_Utils.cmp(n.price, 200) < 1) ? _elm_lang$core$Maybe$Just(n) : _elm_lang$core$Maybe$Nothing;
+};
+var _user$project$StockPrice$StockPrice = F2(
+	function (a, b) {
+		return {price: a, stock: b};
+	});
+var _user$project$StockPrice$stocks = {
+	ctor: '::',
+	_0: A2(_user$project$StockPrice$StockPrice, 1084, 'GOOG'),
+	_1: {
+		ctor: '::',
+		_0: A2(_user$project$StockPrice$StockPrice, 175, 'AAPL'),
+		_1: {
+			ctor: '::',
+			_0: A2(_user$project$StockPrice$StockPrice, 92, 'MSFT'),
+			_1: {
+				ctor: '::',
+				_0: A2(_user$project$StockPrice$StockPrice, 176, 'FB'),
+				_1: {
+					ctor: '::',
+					_0: A2(_user$project$StockPrice$StockPrice, 48, 'INTC'),
+					_1: {
+						ctor: '::',
+						_0: A2(_user$project$StockPrice$StockPrice, 1489, 'AMZN'),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	}
+};
+var _user$project$StockPrice$bestStock = function (stockList) {
+	var filteredList = A2(_elm_lang$core$List$filterMap, _user$project$StockPrice$below200, _user$project$StockPrice$stocks);
+	var sortedList = _elm_lang$core$List$reverse(
+		A2(
+			_elm_lang$core$List$sortBy,
+			function (_) {
+				return _.price;
+			},
+			filteredList));
+	return _elm_lang$core$List$head(sortedList);
+};

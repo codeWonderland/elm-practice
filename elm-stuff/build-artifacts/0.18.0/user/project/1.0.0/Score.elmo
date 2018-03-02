@@ -1,0 +1,12 @@
+var _user$project$Score$addLetter = function (s) {
+	var total = 0;
+	var c = _elm_lang$core$String$toUpper(s);
+	return A2(_elm_lang$core$String$contains, c, 'AEIOULNRST') ? (total + 1) : (A2(_elm_lang$core$String$contains, c, 'DG') ? (total + 2) : (A2(_elm_lang$core$String$contains, c, 'BCMP') ? (total + 3) : (A2(_elm_lang$core$String$contains, c, 'FHVWY') ? (total + 4) : (A2(_elm_lang$core$String$contains, c, 'K') ? (total + 5) : (A2(_elm_lang$core$String$contains, c, 'JX') ? (total + 8) : (A2(_elm_lang$core$String$contains, c, 'QZ') ? (total + 10) : total))))));
+};
+var _user$project$Score$totalWord = function (word) {
+	return _elm_lang$core$List$sum(
+		A2(
+			_elm_lang$core$List$map,
+			_user$project$Score$addLetter,
+			A2(_elm_lang$core$String$split, '', word)));
+};

@@ -1,0 +1,26 @@
+var _user$project$ShortestTrack$shortestTrack = function (trackList) {
+	var sortedList = A2(
+		_elm_lang$core$List$sortBy,
+		function (_) {
+			return _.duration;
+		},
+		trackList);
+	return _elm_lang$core$List$head(sortedList);
+};
+var _user$project$ShortestTrack$Track = F2(
+	function (a, b) {
+		return {title: a, duration: b};
+	});
+var _user$project$ShortestTrack$tracks = {
+	ctor: '::',
+	_0: A2(_user$project$ShortestTrack$Track, 'Bakal', 524),
+	_1: {
+		ctor: '::',
+		_0: A2(_user$project$ShortestTrack$Track, 'Violets for Your Furs', 378),
+		_1: {
+			ctor: '::',
+			_0: A2(_user$project$ShortestTrack$Track, 'Time Was', 451),
+			_1: {ctor: '[]'}
+		}
+	}
+};

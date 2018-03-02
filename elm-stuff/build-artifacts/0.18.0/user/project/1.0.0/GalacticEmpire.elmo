@@ -1,0 +1,104 @@
+var _user$project$GalacticEmpire$decodeName = A2(_elm_lang$core$Json_Decode$field, 'name', _elm_lang$core$Json_Decode$string);
+var _user$project$GalacticEmpire$Model = F2(
+	function (a, b) {
+		return {id: a, name: b};
+	});
+var _user$project$GalacticEmpire$NewPerson = function (a) {
+	return {ctor: 'NewPerson', _0: a};
+};
+var _user$project$GalacticEmpire$getStarWarsData = function (num) {
+	var url = A2(
+		_elm_lang$core$Basics_ops['++'],
+		'https://swapi.co/api/people/',
+		_elm_lang$core$Basics$toString(num));
+	return A2(
+		_elm_lang$http$Http$send,
+		_user$project$GalacticEmpire$NewPerson,
+		A2(_elm_lang$http$Http$get, url, _user$project$GalacticEmpire$decodeName));
+};
+var _user$project$GalacticEmpire$RandomId = function (a) {
+	return {ctor: 'RandomId', _0: a};
+};
+var _user$project$GalacticEmpire$init = {
+	ctor: '_Tuple2',
+	_0: {id: 1, name: ''},
+	_1: A2(
+		_elm_lang$core$Random$generate,
+		_user$project$GalacticEmpire$RandomId,
+		A2(_elm_lang$core$Random$int, 1, 87))
+};
+var _user$project$GalacticEmpire$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'Next':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _user$project$GalacticEmpire$getStarWarsData(model.id)
+				};
+			case 'RandomId':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{id: _p0._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				if (_p0._0.ctor === 'Ok') {
+					return {
+						ctor: '_Tuple2',
+						_0: model,
+						_1: A2(
+							_elm_lang$core$Random$generate,
+							_user$project$GalacticEmpire$RandomId,
+							A2(_elm_lang$core$Random$int, 1, 87))
+					};
+				} else {
+					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+				}
+		}
+	});
+var _user$project$GalacticEmpire$Next = {ctor: 'Next'};
+var _user$project$GalacticEmpire$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h2,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(model.name),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$button,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(_user$project$GalacticEmpire$Next),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Next Entity'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$GalacticEmpire$main = _elm_lang$html$Html$program(
+	{
+		init: _user$project$GalacticEmpire$init,
+		update: _user$project$GalacticEmpire$update,
+		view: _user$project$GalacticEmpire$view,
+		subscriptions: function (_p1) {
+			return _elm_lang$core$Platform_Sub$none;
+		}
+	})();
